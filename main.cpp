@@ -1,7 +1,7 @@
 
 #include<iostream>
 #include<cstdlib>
-
+#include<fstream>
 #include <vector>
 
 using namespace std;
@@ -48,11 +48,16 @@ public:
 		
 	}
 
+	string addTextFile(){
+        return "ID: " + to_string(id) + ", Name: " + name + ", Grade: " + to_string(grade);
+    }
+
 };
 
 
 int main(){
 
+	// to store the informatiuon
    vector<Student> storeDetails;
 
    int id;
@@ -86,6 +91,14 @@ int main(){
    {
 	details.display();
    }
+
+   // write the details to a text file
+   ofstream dataFile ("studentLog.txt");
+   for (auto addDetails : storeDetails)
+   {
+	dataFile<< addDetails.addTextFile()<<endl;
+   }
+
    
 	return 0;
 }
