@@ -1,6 +1,8 @@
 
 #include<iostream>
 #include<cstdlib>
+#include<fstream>
+#include <vector>
 
 using namespace std;
 
@@ -46,28 +48,57 @@ public:
 		
 	}
 
+	string addTextFile(){
+        return "ID: " + to_string(id) + ", Name: " + name + ", Grade: " + to_string(grade);
+    }
+
 };
 
 
 int main(){
 
+	// to store the informatiuon
+   vector<Student> storeDetails;
+
    int id;
    string studentName;
    float stduentGrade;
-
-   cout<<"Enter student name : "<<endl;
-   cin>>studentName;
-   cout<<"Enter grade: "<<endl;
-   cin>>stduentGrade;
-   cout<<"Enter id: "<<endl;
-   cin>>id;
+   string choice;
 
 
-	Student s1(id, studentName, stduentGrade);
-	s1.display();
-	
+   do
+   {
+	//input from user
+	cout<<"Enter student name : "<<endl;
+	cin>>studentName;
+	cout<<"Enter grade: "<<endl;
+	cin>>stduentGrade;
+	cout<<"Enter id: "<<endl;
+	cin>>id;
 
+	// create objects
+	Student newStudent(id, studentName, stduentGrade);
+	storeDetails.push_back(newStudent);
 
+	cout<<"Do you wnat to continue ? press 'y/Y' to continue... ";
+	cin>>choice;
 
+   } while (choice=="y" || choice =="Y");
+
+   // display store details
+   cout<<"\n Saved Details \n";
+   for (auto details : storeDetails)
+   {
+	details.display();
+   }
+
+   // write the details to a text file
+   ofstream dataFile ("studentLog.txt");
+   for (auto addDetails : storeDetails)
+   {
+	dataFile<< addDetails.addTextFile()<<endl;
+   }
+
+   
 	return 0;
 }
