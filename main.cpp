@@ -46,11 +46,7 @@ public:
 		
 	}
 
-	
-
 };
-
-
 
 
 int main(){
